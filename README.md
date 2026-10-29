@@ -14,5 +14,6 @@
 
 ## 更新
 ```
+./fetch_data.sh
 cd engine && python3 backtest.py && python3 build_site.py
 ```
