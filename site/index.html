@@ -186,6 +186,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--now);outline-of
   </footer>
 </main>
 
+<script src="data.js"></script>
 <script>
 const ERA = [
   ["1906-01","1907-12","1907年恐慌の前後"],["1929-01","1929-12","大恐慌の入口"],
@@ -341,7 +342,7 @@ function renderShare(){
   function selectText(){ const r=document.createRange(); r.selectNodeContents($("share-text")); const s=getSelection(); s.removeAllRanges(); s.addRange(r); $("copied").textContent="選択しました。コピーしてください"; }
 }
 
-fetch("data.json").then(r=>r.json()).then(d=>{
+(window.HOTORI_DATA ? Promise.resolve(window.HOTORI_DATA) : fetch("data.json").then(r=>r.json())).then(d=>{
   D=d;
   $("asof").textContent=`S&P 500 ・ ${jp(D.now.month)}時点 ・ 1871年からの月次データ`;
   $("eps-known").textContent=jp(D.eps_last_known);

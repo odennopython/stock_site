@@ -133,7 +133,10 @@ def main():
         },
     }
     OUT.parent.mkdir(exist_ok=True)
-    OUT.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":"), default=lambda o: o.item()))
+    text = json.dumps(data, ensure_ascii=False, separators=(",", ":"), default=lambda o: o.item())
+    OUT.write_text(text)
+    # Same data as a script, so index.html also opens straight from disk (file://).
+    OUT.with_suffix(".js").write_text(f"window.HOTORI_DATA={text};\n")
     print("now", now["month"], [(a["month"], a["score"], a["why"], a["fwd12"]) for a in analogs])
     print("fan", fan["analog_q"], fan["all_q"], fan["analog_down20"], fan["all_down20"])
     print("bytes", OUT.stat().st_size)
