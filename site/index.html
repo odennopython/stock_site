@@ -304,7 +304,7 @@ function renderGauges(){
   $("gauges").innerHTML = order.map(k=>`
     <div class="g"><span class="lab">${L[k][0]}</span>
       <span class="track" aria-label="1871年以降で${P[k]}パーセンタイル"><span class="tick" style="left:25%"></span><span class="tick" style="left:50%"></span><span class="tick" style="left:75%"></span><span class="dot" style="left:${Math.min(98,Math.max(2,P[k]))}%"></span></span>
-      <span class="val">${I[k]}${L[k][1]==="倍"?"倍":L[k][1]==="pt"?"pt":"%"}<br><span class="pc">上位${Math.max(1,100-P[k])}%</span></span></div>`).join("");
+      <span class="val">${I[k]}${L[k][1]==="倍"?"倍":L[k][1]==="pt"?"pt":"%"}<br><span class="pc">${P[k]>=50?`上位${Math.max(1,100-P[k])}%`:`下位${Math.max(1,P[k])}%`}</span></span></div>`).join("");
 }
 
 function renderHistory(){
